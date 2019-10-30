@@ -2,10 +2,9 @@ package intervals;
 
 import java.util.Stack;
 
-import genericNode.AbstractTreeNode;
-import genericNode.GroupNode;
-import genericNode.LeafNode;
-import genericNode.TreeUtil;
+import generictree.AbstractTreeNode;
+import generictree.GroupNode;
+import generictree.LeafNode;
 
 /**
  * The class represents a interval tree with all the intervals and operations.
@@ -64,12 +63,6 @@ public class IntervalTree implements Intervals {
   public Interval evaluate() {
     if (root == null) return null;
     return helpEvaluate(root);
-  }
-
-  @Override
-  public String textTree() {
-    if (root == null) return "";
-    return TreeUtil.helpText(root);
   }
 
   private Interval helpEvaluate(AbstractTreeNode<String> root) {

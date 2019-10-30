@@ -1,19 +1,19 @@
-package expression;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import expression.ExpressionTree;
+
+/*import static org.junit.jupiter.api.Assertions.fail;*/
 
 /**
  * The class represents the Junit Test for ExpressionTree.
  */
 public class ExpressionTreeTest {
 
-  private static String FAIL_INFO = "Should have thrown an exception!";
+/*  private static String FAIL_INFO = "Should have thrown an exception!";*/
 
 
-  @Test
+/*  @Test
   public void constructor() throws Exception {
     ExpressionTree tree = new ExpressionTree("2");
     tree = new ExpressionTree("1 2 +");
@@ -46,7 +46,7 @@ public class ExpressionTreeTest {
     } catch (IllegalArgumentException e) {
       //Do nothing here.
     }
-  }
+  }*/
 
   @Test
   public void evaluate() {
@@ -78,5 +78,53 @@ public class ExpressionTreeTest {
     Assert.assertTrue(expressionTree2.infix().equals("3"));
     ExpressionTree expressionTree3 = new ExpressionTree("");
     Assert.assertTrue(expressionTree3.infix().equals(""));
+  }
+
+
+  @Test
+  public void textTree() {
+    ExpressionTree expressionTree = new ExpressionTree("1 4 6 3 - + 6 - 5 + /");
+    Assert.assertTrue(expressionTree.textTree().equals("/\n" +
+            "|\n" +
+            "|\n" +
+            "|___1\n" +
+            "|\n" +
+            "|___+\n" +
+            "   |\n" +
+            "   |\n" +
+            "   |___-\n" +
+            "   |   |\n" +
+            "   |   |\n" +
+            "   |   |___+\n" +
+            "   |   |   |\n" +
+            "   |   |   |\n" +
+            "   |   |   |___4\n" +
+            "   |   |   |\n" +
+            "   |   |   |___-\n" +
+            "   |   |      |\n" +
+            "   |   |      |\n" +
+            "   |   |      |___6\n" +
+            "   |   |      |\n" +
+            "   |   |      |___3\n" +
+            "   |   |\n" +
+            "   |   |___6\n" +
+            "   |\n" +
+            "   |___5"));
+    ExpressionTree expressionTree1 = new ExpressionTree("");
+    Assert.assertTrue(expressionTree1.textTree().equals(""));
+    ExpressionTree expressionTree2 = new ExpressionTree("1");
+    Assert.assertTrue(expressionTree2.textTree().equals("1"));
+    ExpressionTree expressionTree3 = new ExpressionTree("5 1 2 + /");
+    Assert.assertTrue(expressionTree3.textTree().equals("/\n" +
+            "|\n" +
+            "|\n" +
+            "|___5\n" +
+            "|\n" +
+            "|___+\n" +
+            "   |\n" +
+            "   |\n" +
+            "   |___1\n" +
+            "   |\n" +
+            "   |___2"));
   }
 }

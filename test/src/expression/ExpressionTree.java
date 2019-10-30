@@ -1,15 +1,11 @@
 package expression;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
-import genericNode.AbstractTreeNode;
-import genericNode.GroupNode;
-import genericNode.LeafNode;
-import genericNode.TreeUtil;
+import generictree.AbstractTreeNode;
+import generictree.GroupNode;
+import generictree.LeafNode;
+import generictree.ValidationUtil;
 
 /**
  * The class represents all the operations in a expression tree, including all the operations and
@@ -34,10 +30,10 @@ public class ExpressionTree implements Expression {
     String[] strs = postfix.trim().split("\\s+");
     if (strs.length == 1) {
       String str = strs[0];
-      if (!TreeUtil.isValid(str)) {
+      if (!ValidationUtil.isValid(str)) {
         throw new IllegalArgumentException(INVALID_EXPRESSION);
       }
-      if (!TreeUtil.isDouble(str)) {
+      if (!ValidationUtil.isDouble(str)) {
         throw new IllegalArgumentException(INVALID_EXPRESSION);
       }
       this.root = new LeafNode<>(str);
@@ -45,10 +41,10 @@ public class ExpressionTree implements Expression {
     }
     Stack<AbstractTreeNode<String>> stack = new Stack<>();
     for (int i = 0; i < strs.length; i++) {
-      if (!TreeUtil.isValid(strs[i])) {
+      if (!ValidationUtil.isValid(strs[i])) {
         throw new IllegalArgumentException(INVALID_EXPRESSION);
       }
-      if (TreeUtil.isDouble(strs[i])) {
+      if (ValidationUtil.isDouble(strs[i])) {
         stack.push(new LeafNode(strs[i]));
       } else {
         GroupNode<String> curRoot = new GroupNode<>(strs[i]);
@@ -85,6 +81,9 @@ public class ExpressionTree implements Expression {
         return helpEvaluate(node.left) * helpEvaluate(node.right);
       } else {
         double right = helpEvaluate(node.right);
+        if (right == 0) {
+          throw new IllegalArgumentException("The dividend cannot be 0");
+        }
         return helpEvaluate(node.left) / right;
       }
     }
@@ -102,7 +101,7 @@ public class ExpressionTree implements Expression {
     } else {
       StringBuilder sb = new StringBuilder();
       GroupNode node = (GroupNode) root;
-      sb.append("( ").append(inOrderTraverse(node.left)).append(" ").append(root.value).append(" ").append(inOrderTraverse(node.right)).append(" )");
+      sb.append("(").append(inOrderTraverse(node.left)).append(root.value).append(inOrderTraverse(node.right)).append(")");
       return String.valueOf(sb);
     }
   }
@@ -113,20 +112,13 @@ public class ExpressionTree implements Expression {
     return preOrderTraverse(root);
   }
 
-  @Override
-  public String textTree() {
-    if (root == null) return "";
-    return TreeUtil.helpText(root);
-  }
-
-
   private String preOrderTraverse(AbstractTreeNode<String> root) {
     if (root instanceof LeafNode) {
       return root.value;
     } else {
       StringBuilder sb = new StringBuilder();
       GroupNode node = (GroupNode) root;
-      sb.append("(").append(node.value).append(" ").append(preOrderTraverse(node.left)).append(" ").append(preOrderTraverse(node.right)).append(")");
+      sb.append("(").append(root.value).append(preOrderTraverse(node.left)).append(preOrderTraverse(node.right)).append(")");
       return String.valueOf(sb);
     }
   }
