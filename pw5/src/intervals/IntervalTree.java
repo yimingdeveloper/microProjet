@@ -2,10 +2,10 @@ package intervals;
 
 import java.util.Stack;
 
-import genericNode.AbstractTreeNode;
-import genericNode.GroupNode;
-import genericNode.LeafNode;
-import genericNode.TreeUtil;
+import genericnode.AbstractTreeNode;
+import genericnode.GroupNode;
+import genericnode.LeafNode;
+import genericnode.TreeUtil;
 
 /**
  * The class represents a interval tree with all the intervals and operations.
@@ -21,7 +21,7 @@ public class IntervalTree implements Intervals {
    * The constructor for IntervalTree.
    *
    * @param expression the String express the interval tree.
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException If met with illegal argument, throw this exception.
    */
   public IntervalTree(String expression) throws IllegalArgumentException {
     if (expression == null || expression.trim().isEmpty()) {
@@ -62,13 +62,17 @@ public class IntervalTree implements Intervals {
 
   @Override
   public Interval evaluate() {
-    if (root == null) return null;
+    if (root == null) {
+      return null;
+    }
     return helpEvaluate(root);
   }
 
   @Override
   public String textTree() {
-    if (root == null) return "";
+    if (root == null) {
+      return "";
+    }
     return TreeUtil.helpText(root);
   }
 

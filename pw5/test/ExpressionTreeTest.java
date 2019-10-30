@@ -3,17 +3,18 @@ import org.junit.Test;
 
 import expression.ExpressionTree;
 
-/*import static org.junit.jupiter.api.Assertions.fail;*/
+import static junit.framework.TestCase.fail;
+
 
 /**
  * The class represents the Junit Test for ExpressionTree.
  */
 public class ExpressionTreeTest {
 
-/*  private static String FAIL_INFO = "Should have thrown an exception!";*/
+  private static String FAIL_INFO = "Should have thrown an exception!";
 
 
-/*  @Test
+  @Test
   public void constructor() throws Exception {
     ExpressionTree tree = new ExpressionTree("2");
     tree = new ExpressionTree("1 2 +");
@@ -46,7 +47,7 @@ public class ExpressionTreeTest {
     } catch (IllegalArgumentException e) {
       //Do nothing here.
     }
-  }*/
+  }
 
   @Test
   public void evaluate() {
@@ -63,7 +64,7 @@ public class ExpressionTreeTest {
   @Test
   public void infix() {
     ExpressionTree expressionTree = new ExpressionTree("1.2 5.4 *   -4.5 + ");
-    Assert.assertTrue(expressionTree.infix().equals("((1.2*5.4)+-4.5)"));
+    Assert.assertTrue(expressionTree.infix().equals("( ( 1.2 * 5.4 ) + -4.5 )"));
     ExpressionTree expressionTree2 = new ExpressionTree("3");
     Assert.assertTrue(expressionTree2.infix().equals("3"));
     ExpressionTree expressionTree3 = new ExpressionTree("");
@@ -73,7 +74,7 @@ public class ExpressionTreeTest {
   @Test
   public void schemeExpression() {
     ExpressionTree expressionTree = new ExpressionTree("1.2 5.4 *   -4.5 + ");
-    Assert.assertTrue(expressionTree.schemeExpression().equals("(+(*1.25.4)-4.5)"));
+    Assert.assertTrue(expressionTree.schemeExpression().equals("(+ (* 1.2 5.4) -4.5)"));
     ExpressionTree expressionTree2 = new ExpressionTree("3");
     Assert.assertTrue(expressionTree2.infix().equals("3"));
     ExpressionTree expressionTree3 = new ExpressionTree("");

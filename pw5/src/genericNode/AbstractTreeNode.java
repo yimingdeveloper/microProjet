@@ -1,4 +1,4 @@
-package genericNode;
+package genericnode;
 
 /**
  * Abstract node of the Expression Tree.

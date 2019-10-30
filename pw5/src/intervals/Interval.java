@@ -7,7 +7,15 @@ import java.util.Objects;
  * end, both integral values.
  */
 public class Interval {
-  int start, end;
+  /**
+   * Start of the interval.
+   */
+  int start;
+
+  /**
+   * End of the interval.
+   */
+  int end;
 
   /**
    * Construct an interval given its start and end values.
@@ -54,9 +62,9 @@ public class Interval {
   }
 
   /**
-   * Return a string-representation of this interval
+   * Return a string-representation of this interval.
    *
-   * @return a string of the format start,end
+   * @return A string of the format start,end.
    */
   public String toString() {
     return "" + start + "," + end;
@@ -83,9 +91,9 @@ public class Interval {
   }
 
   /**
-   * Hashcode for the interval, using start and end
+   * Hashcode for the interval, using start and end.
    *
-   * @return the hash value for this interval
+   * @return The hash value for this interval.
    */
   @Override
   public int hashCode() {

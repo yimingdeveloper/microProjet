@@ -1,6 +1,4 @@
-package genericNode;
-
-import genericNode.AbstractTreeNode;
+package genericnode;
 
 /**
  * Node for numeric values only.

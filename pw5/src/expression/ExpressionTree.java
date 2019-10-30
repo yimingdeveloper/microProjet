@@ -1,15 +1,11 @@
 package expression;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
-import genericNode.AbstractTreeNode;
-import genericNode.GroupNode;
-import genericNode.LeafNode;
-import genericNode.TreeUtil;
+import genericnode.AbstractTreeNode;
+import genericnode.GroupNode;
+import genericnode.LeafNode;
+import genericnode.TreeUtil;
 
 /**
  * The class represents all the operations in a expression tree, including all the operations and
@@ -25,7 +21,7 @@ public class ExpressionTree implements Expression {
    * Constructs a express tree with a postOrder String.
    *
    * @param postfix The string used to build a express tree.
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException If met with illegal argument, throw this exception.
    */
   public ExpressionTree(String postfix) throws IllegalArgumentException {
     if (postfix == null || postfix.trim().isEmpty()) {
@@ -68,7 +64,9 @@ public class ExpressionTree implements Expression {
 
   @Override
   public double evaluate() {
-    if (root == null) return 0;
+    if (root == null) {
+      return 0;
+    }
     return helpEvaluate(root);
   }
 
@@ -77,9 +75,9 @@ public class ExpressionTree implements Expression {
       return Double.parseDouble(root.value);
     } else {
       GroupNode node = (GroupNode) root;
-      if (root.value.equals("+"))
+      if (root.value.equals("+")) {
         return helpEvaluate(node.left) + helpEvaluate(node.right);
-      else if (root.value.equals("-")) {
+      } else if (root.value.equals("-")) {
         return helpEvaluate(node.left) - helpEvaluate(node.right);
       } else if (root.value.equals("*")) {
         return helpEvaluate(node.left) * helpEvaluate(node.right);
@@ -92,7 +90,9 @@ public class ExpressionTree implements Expression {
 
   @Override
   public String infix() {
-    if (root == null) return "";
+    if (root == null) {
+      return "";
+    }
     return inOrderTraverse(root);
   }
 
@@ -102,20 +102,25 @@ public class ExpressionTree implements Expression {
     } else {
       StringBuilder sb = new StringBuilder();
       GroupNode node = (GroupNode) root;
-      sb.append("( ").append(inOrderTraverse(node.left)).append(" ").append(root.value).append(" ").append(inOrderTraverse(node.right)).append(" )");
+      sb.append("( ").append(inOrderTraverse(node.left)).append(" ").append(root.value).append(" ")
+              .append(inOrderTraverse(node.right)).append(" )");
       return String.valueOf(sb);
     }
   }
 
   @Override
   public String schemeExpression() {
-    if (root == null) return "";
+    if (root == null) {
+      return "";
+    }
     return preOrderTraverse(root);
   }
 
   @Override
   public String textTree() {
-    if (root == null) return "";
+    if (root == null) {
+      return "";
+    }
     return TreeUtil.helpText(root);
   }
 
@@ -126,7 +131,8 @@ public class ExpressionTree implements Expression {
     } else {
       StringBuilder sb = new StringBuilder();
       GroupNode node = (GroupNode) root;
-      sb.append("(").append(node.value).append(" ").append(preOrderTraverse(node.left)).append(" ").append(preOrderTraverse(node.right)).append(")");
+      sb.append("(").append(node.value).append(" ").append(preOrderTraverse(node.left)).append(" ")
+              .append(preOrderTraverse(node.right)).append(")");
       return String.valueOf(sb);
     }
   }

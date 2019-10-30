@@ -1,6 +1,4 @@
-package genericNode;
-
-import genericNode.AbstractTreeNode;
+package genericnode;
 
 /**
  * Group node for the expression. Value of group node could only be an operator but not a numeric

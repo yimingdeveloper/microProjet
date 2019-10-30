@@ -1,11 +1,7 @@
-package genericNode;
+package genericnode;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import genericNode.AbstractTreeNode;
-import genericNode.GroupNode;
-import genericNode.LeafNode;
 
 /**
  * Check validation of input of the {@link expression.ExpressionTree}.

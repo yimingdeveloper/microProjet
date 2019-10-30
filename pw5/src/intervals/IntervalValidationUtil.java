@@ -9,14 +9,16 @@ public class IntervalValidationUtil {
    *
    * @param str The input String represents interval
    * @return Boolean value represents the result of validation
-   * @throws NumberFormatException
+   * @throws NumberFormatException If number format is not valid, throw this exception.
    */
   public static boolean isValidOperation(String str) throws NumberFormatException {
     if (!str.contains(",")) {
       return false;
     }
     String[] strs = str.trim().split(",");
-    if (strs.length != 2) return false;
+    if (strs.length != 2) {
+      return false;
+    }
     Integer.parseInt(strs[0]);
     Integer.parseInt(strs[1]);
     return true;
